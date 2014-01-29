@@ -3,6 +3,7 @@ public class Drink {
 	private double price;
 	private String name;
 	private int type;
+	
 	public double getPrice() {
 		return price;
 	}
