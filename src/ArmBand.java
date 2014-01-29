@@ -5,6 +5,7 @@ public class ArmBand {
 	private Date eDate;
 	private int colour;
 	private String code;
+	
 	public Date getsDate() {
 		return sDate;
 	}
