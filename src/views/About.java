@@ -28,7 +28,7 @@ public class About {
 	    editorPane.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);  
 	    editorPane.setFont(new Font("Arial", Font.BOLD, 13));
 	
-	    editorPane.setPreferredSize(new Dimension(520,200));
+	    editorPane.setPreferredSize(new Dimension(540,300));
 	    editorPane.setEditable(false);
 	    editorPane.setContentType("text/html");
 	    editorPane.setText(
@@ -37,7 +37,7 @@ public class About {
 	            + "<table border='0px' cxellpadding='10px' height='100%'>"
 	            + "<tr>"
 	            + "<td valign='center'>"
-	            + "<img src='"
+	            + "<br /><img src='"
 	            + About.class.getResource("/resources/Utech-logo.png").toExternalForm()
 	            + "'>"
 	            + "</td>"
@@ -47,6 +47,10 @@ public class About {
 	            +"</h2>"
 	            + "Group Project issued by the University of Technology, Jamaica <br /><br />"
 	            + "Group Members: <br />"
+	            + "- Ashani Kentish <br />-"
+	            + "<a href=\"http://www.reliqartz.com/\"><b> Patrick Reid</b></a><br />"
+	            + "- Brandon Franklyn <br />"
+	            + "- Rajeif Manderson <br />"
 	            + "<br />"
 	            + "Tutor:"
 	            + "<br />"
