@@ -3,7 +3,8 @@ View Layer
 
 All the different UI screens of the systems
  
- ###TODO
+TODO
+====
  * Complete implementation of action listeners on ManagerView's buttons
  * Implement the other Views (User, Bartender, Main, etc)
  * Link the controllers to database
