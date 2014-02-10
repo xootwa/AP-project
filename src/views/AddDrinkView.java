@@ -96,6 +96,7 @@ public class AddDrinkView extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.setFocusable(false);
 				okButton.setIcon(new ImageIcon(AddDrinkView.class.getResource("/resources/accept.gif")));
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
@@ -103,6 +104,7 @@ public class AddDrinkView extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.setFocusable(false);
 				cancelButton.setIcon(new ImageIcon(AddDrinkView.class.getResource("/resources/cancel.png")));
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);

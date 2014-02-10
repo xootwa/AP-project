@@ -1,8 +1,5 @@
 package views;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -19,7 +16,6 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTable;
@@ -29,10 +25,14 @@ import javax.swing.JSeparator;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 import org.eclipse.wb.swing.FocusTraversalOnArray;
-
 import java.awt.Component;
+import javax.swing.border.LineBorder;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.TitledBorder;
 
 public class ManagerView extends JFrame {
 
@@ -43,34 +43,14 @@ public class ManagerView extends JFrame {
 	private JMenuItem mntmAbout;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ManagerView frame = new ManagerView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public ManagerView() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ManagerView.class.getResource("/resources/drink.png")));
 		setTitle("AP-Project v0.0.1");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 640, 480);
+		setBounds(100, 100, 720, 576);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -112,37 +92,41 @@ public class ManagerView extends JFrame {
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addComponent(toolBarPanel, GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
-				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
+				.addComponent(toolBarPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(toolBarPanel, GroupLayout.PREFERRED_SIZE, 51, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
+					.addComponent(toolBarPanel, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 515, GroupLayout.PREFERRED_SIZE))
 		);
 		
 		JToolBar toolBar = new JToolBar();
+		toolBar.setFocusable(false);
 		toolBar.setFloatable(false);
 		toolBar.setBackground(new Color(139, 0, 0));
 		GroupLayout gl_toolBarPanel = new GroupLayout(toolBarPanel);
 		gl_toolBarPanel.setHorizontalGroup(
 			gl_toolBarPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_toolBarPanel.createSequentialGroup()
-					.addGap(129)
-					.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
-					.addGap(178))
+					.addGap(131)
+					.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+					.addGap(176))
 		);
 		gl_toolBarPanel.setVerticalGroup(
 			gl_toolBarPanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_toolBarPanel.createSequentialGroup()
-					.addGap(6)
-					.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addContainerGap())
+				.addGroup(Alignment.LEADING, gl_toolBarPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+					.addGap(6))
 		);
 		
 		JButton btnAddDrink = new JButton("Add Drink ");
+		btnAddDrink.setFocusable(false);
+		btnAddDrink.setForeground(new Color(255, 255, 255));
+		btnAddDrink.setBackground(new Color(139, 0, 0));
 		btnAddDrink.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				AddDrinkView newDrink = new AddDrinkView();
@@ -158,6 +142,9 @@ public class ManagerView extends JFrame {
 		toolBar.add(separator);
 		
 		JButton btnRemoveDrink = new JButton("Remove Drink");
+		btnRemoveDrink.setFocusable(false);
+		btnRemoveDrink.setForeground(new Color(255, 255, 255));
+		btnRemoveDrink.setBackground(new Color(139, 0, 0));
 		btnRemoveDrink.setIcon(new ImageIcon(ManagerView.class.getResource("/resources/rem_drink.png")));
 		toolBar.add(btnRemoveDrink);
 		
@@ -167,6 +154,9 @@ public class ManagerView extends JFrame {
 		toolBar.add(separator_1);
 		
 		JButton btnModifyDrink = new JButton("Modify Drink ");
+		btnModifyDrink.setFocusable(false);
+		btnModifyDrink.setForeground(new Color(255, 255, 255));
+		btnModifyDrink.setBackground(new Color(139, 0, 0));
 		btnModifyDrink.setIcon(new ImageIcon(ManagerView.class.getResource("/resources/mod_drink.png")));
 		toolBar.add(btnModifyDrink);
 		toolBarPanel.setLayout(gl_toolBarPanel);

@@ -45,7 +45,7 @@ public class About {
 	            + "<h2>"
 	            + "Advanced Programming Using Java"
 	            +"</h2>"
-	            + "Group Project issued by the University of Technology, Jamaica <br />"
+	            + "Group Project issued by the University of Technology, Jamaica <br /><br />"
 	            + "Group Members: <br />"
 	            + "<br />"
 	            + "Tutor:"
