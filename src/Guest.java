@@ -4,6 +4,7 @@ public class Guest {
 	private String name;
 	private String code;
 	private ArmBand band;
+	
 	public String getName() {
 		return name;
 	}
@@ -27,7 +28,6 @@ public class Guest {
 		this.name = name;
 		this.code = code;
 		this.band = band;
-	}
-	
+	}	
 	
 }

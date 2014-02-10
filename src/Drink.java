@@ -1,5 +1,6 @@
 
 public class Drink {
+	// this comment
 	private double price;
 	private String name;
 	private int type;

@@ -1,4 +1,4 @@
 
-public class Manager {
+public class Manager extends Staff {
 
 }
