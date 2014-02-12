@@ -25,14 +25,6 @@ import javax.swing.JSeparator;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-import java.awt.Component;
-import javax.swing.border.LineBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.TitledBorder;
 
 public class ManagerView extends JFrame {
 
