@@ -1,29 +1,38 @@
 package views;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
+import java.awt.Color;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.Color;
-import javax.swing.SwingConstants;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.Toolkit;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.JPasswordField;
 
 public class LoginView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textUserName;
-	private JTextField textPassword;
 	private JLabel lblUserName;
 	private JLabel lblPassword;
 	private JButton btnLogin;
 	private JLabel lblBackground;
 	private JLabel lblBackground_btm;
 	private JLabel lblWineBg;
+	private JPasswordField passwordField;
 	
 	
 	public LoginView() {
@@ -41,8 +50,8 @@ public class LoginView extends JFrame {
 		contentPane = new JPanel();
 		lblUserName = new JLabel("User Name:");
 		lblPassword = new JLabel("Password:");
-		textUserName = new JTextField();
-		textPassword = new JTextField();
+		textUserName = new JTextField("User Name");
+		passwordField = new JPasswordField("Password");
 		btnLogin = new JButton("Login");
 		lblBackground = new JLabel("bg");
 		lblWineBg = new JLabel("");
@@ -64,14 +73,13 @@ public class LoginView extends JFrame {
 		lblPassword.setBounds(102, 356, 63, 14);
 		
 		textUserName.setForeground(new Color(169, 169, 169));
-		textUserName.setText("User Name");
+		textUserName.setCaretPosition(1);
 		textUserName.setBounds(167, 329, 193, 20);
 		textUserName.setColumns(10);
 		
-		textPassword.setForeground(new Color(169, 169, 169));
-		textPassword.setText("Password");
-		textPassword.setBounds(167, 353, 193, 20);
-		textPassword.setColumns(10);
+		passwordField.setEchoChar((char)0);
+		passwordField.setForeground(new Color(169, 169, 169));
+		passwordField.setBounds(167, 353, 193, 20);
 		
 		btnLogin.setFocusPainted(false);
 		btnLogin.setBackground(new Color(139, 0, 0));
@@ -88,6 +96,50 @@ public class LoginView extends JFrame {
 	
 	
 	public void registerListeners(){
+		textUserName.addFocusListener(new FocusListener(){
+			@Override
+			public void focusGained(FocusEvent event){
+				if(textUserName.getText().equals("User Name")){
+					textUserName.setText("");
+					textUserName.setForeground(new Color(0, 0, 0));
+					textUserName.setBorder(BorderFactory.createCompoundBorder(new LineBorder(new Color(128, 0, 0)),
+							BorderFactory.createEmptyBorder(0, 2, 0, 0)));
+				}
+			}
+			
+			@Override
+			public void focusLost(FocusEvent event){
+				if(textUserName.getText().equals("User Name") || textUserName.getText().isEmpty()){
+					textUserName.setBorder( UIManager.getBorder("TextField.border") );
+					textUserName.setForeground(new Color(169, 169, 169));
+					textUserName.setText("User Name");
+				}
+			}
+		});
+		
+		passwordField.addFocusListener(new FocusListener(){
+			@Override
+			public void focusGained(FocusEvent event){
+				if(passwordField.getText().equals("Password")){
+					passwordField.setText("");
+					passwordField.setEchoChar('●');
+					passwordField.setForeground(new Color(0, 0, 0));
+					passwordField.setBorder(BorderFactory.createCompoundBorder(new LineBorder(new Color(128, 0, 0)),
+							BorderFactory.createEmptyBorder(0, 2, 0, 0)));
+				}
+			}
+			
+			@Override
+			public void focusLost(FocusEvent event){
+				if("".equalsIgnoreCase(passwordField.getText().trim())){
+					passwordField.setBorder( UIManager.getBorder("TextField.border") );
+					passwordField.setEchoChar((char)0);
+					passwordField.setForeground(new Color(169, 169, 169));
+					passwordField.setText("Password");
+				}
+			}
+		});
+		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				ManagerView manager = new ManagerView();
@@ -103,7 +155,7 @@ public class LoginView extends JFrame {
 		contentPane.add(lblUserName);
 		contentPane.add(lblPassword);
 		contentPane.add(textUserName);
-		contentPane.add(textPassword);
+		contentPane.add(passwordField);
 		contentPane.add(lblBackground);
 		contentPane.add(btnLogin);
 		contentPane.add(lblBackground_btm);
