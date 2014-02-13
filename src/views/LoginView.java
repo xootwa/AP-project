@@ -67,16 +67,16 @@ public class LoginView extends JFrame {
 		lblUserName.setBounds(102, 332, 63, 14);
 		
 		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPassword.setBounds(102, 356, 63, 14);
+		lblPassword.setBounds(102, 360, 63, 14);
 		
-		textUserName.setForeground(new Color(169, 169, 169));
-		textUserName.setCaretPosition(1);
+		textUserName.setForeground(new Color(128, 128, 128));
+		textUserName.setCaretPosition(0);
 		textUserName.setBounds(167, 329, 193, 20);
 		textUserName.setColumns(10);
 		
 		passwordField.setEchoChar((char)0);
-		passwordField.setForeground(new Color(169, 169, 169));
-		passwordField.setBounds(167, 353, 193, 20);
+		passwordField.setForeground(new Color(128, 128, 128));
+		passwordField.setBounds(167, 357, 193, 20);
 		
 		btnLogin.setFocusPainted(false);
 		btnLogin.setBackground(new Color(139, 0, 0));
@@ -108,7 +108,7 @@ public class LoginView extends JFrame {
 			public void focusLost(FocusEvent event){
 				if(textUserName.getText().equals("User Name") || textUserName.getText().isEmpty()){
 					textUserName.setBorder( UIManager.getBorder("TextField.border") );
-					textUserName.setForeground(new Color(169, 169, 169));
+					textUserName.setForeground(new Color(128, 128, 128));
 					textUserName.setText("User Name");
 				}
 			}
@@ -131,7 +131,7 @@ public class LoginView extends JFrame {
 				if("".equalsIgnoreCase(passwordField.getText().trim())){
 					passwordField.setBorder( UIManager.getBorder("TextField.border") );
 					passwordField.setEchoChar((char)0);
-					passwordField.setForeground(new Color(169, 169, 169));
+					passwordField.setForeground(new Color(128, 128, 128));
 					passwordField.setText("Password");
 				}
 			}
