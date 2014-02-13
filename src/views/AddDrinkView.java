@@ -17,6 +17,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AddDrinkView extends JDialog {
 
@@ -108,6 +110,11 @@ public class AddDrinkView extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent ae) {
+						dispose();
+					}
+				});
 				cancelButton.setFocusable(false);
 				cancelButton.setIcon(new ImageIcon(AddDrinkView.class.getResource("/resources/cancel.png")));
 				cancelButton.setActionCommand("Cancel");
