@@ -12,15 +12,21 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JSpinner;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.DefaultComboBoxModel;
 
 public class AddDrinkView extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private JLabel lblName;
+	private JLabel lblType;
+	private JLabel lblPrice;
 	private JTextField tfName;
-	private JTextField tfType;
+	private JComboBox comboBoxType;
+	private JSpinner spinnerPrice;
 
 	/**
 	 * Create the dialog.
@@ -33,37 +39,37 @@ public class AddDrinkView extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		
-		JLabel lblName = new JLabel("Name:");
+		lblName = new JLabel("Name:");
 		
 		tfName = new JTextField();
 		tfName.setColumns(10);
 		
-		JLabel lblPrice = new JLabel("Type:");
+		lblType = new JLabel("Type:");
 		
-		tfType = new JTextField();
-		tfType.setColumns(10);
+		lblPrice = new JLabel("Price:");
 		
-		JLabel lblPrice_1 = new JLabel("Price:");
+		spinnerPrice = new JSpinner();
 		
-		JSpinner spinner = new JSpinner();
+		comboBoxType = new JComboBox();
+		comboBoxType.setModel(new DefaultComboBoxModel(new String[] {"Alcohol", "Beverage", "Cocktail", "Hot Beverage", "Soda", "Tea"}));
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addComponent(lblName)
 							.addGap(10)
 							.addComponent(tfName, GroupLayout.PREFERRED_SIZE, 279, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addComponent(lblType)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(comboBoxType, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addComponent(lblPrice)
 							.addGap(10)
-							.addComponent(tfType, GroupLayout.PREFERRED_SIZE, 282, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addComponent(lblPrice_1)
-							.addGap(10)
-							.addComponent(spinner, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(spinnerPrice, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(102, Short.MAX_VALUE))
 		);
 		gl_contentPanel.setVerticalGroup(
@@ -75,19 +81,17 @@ public class AddDrinkView extends JDialog {
 							.addGap(3)
 							.addComponent(lblName))
 						.addComponent(tfName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(32)
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblPrice))
-						.addComponent(tfType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(35)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblType)
+						.addComponent(comboBoxType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(38)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addGap(6)
-							.addComponent(lblPrice_1))
-						.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(59, Short.MAX_VALUE))
+							.addComponent(lblPrice))
+						.addComponent(spinnerPrice, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(49, Short.MAX_VALUE))
 		);
 		contentPanel.setLayout(gl_contentPanel);
 		{
