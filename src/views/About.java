@@ -50,7 +50,7 @@ public class About {
 	            + "- Ashani Kentish <br />-"
 	            + "<a href=\"http://www.reliqartz.com/\"><b> Patrick Reid</b></a><br />"
 	            + "- Brandon Franklyn <br />"
-	            + "- Rajeif Manderson <br />"
+	            + "- Rajiv Manderson <br />"
 	            + "<br />"
 	            + "Tutor:"
 	            + "<br />"
