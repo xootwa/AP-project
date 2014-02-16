@@ -8,6 +8,8 @@ USE `ap-project` ;
 -- -----------------------------------------------------
 -- Table `ap-project`.`armband_colours`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `ap-project`.`armband_colours` ;
+
 CREATE TABLE IF NOT EXISTS `ap-project`.`armband_colours` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(30) NULL,
@@ -19,6 +21,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `ap-project`.`armbands`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `ap-project`.`armbands` ;
+
 CREATE TABLE IF NOT EXISTS `ap-project`.`armbands` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `startDate` DATE NOT NULL,
@@ -39,6 +43,8 @@ DEFAULT CHARACTER SET = latin1;
 -- -----------------------------------------------------
 -- Table `ap-project`.`drink_types`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `ap-project`.`drink_types` ;
+
 CREATE TABLE IF NOT EXISTS `ap-project`.`drink_types` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(15) NOT NULL,
@@ -51,6 +57,8 @@ DEFAULT CHARACTER SET = latin1;
 -- -----------------------------------------------------
 -- Table `ap-project`.`drinks`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `ap-project`.`drinks` ;
+
 CREATE TABLE IF NOT EXISTS `ap-project`.`drinks` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
@@ -70,9 +78,13 @@ DEFAULT CHARACTER SET = latin1;
 -- -----------------------------------------------------
 -- Table `ap-project`.`guests`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `ap-project`.`guests` ;
+
 CREATE TABLE IF NOT EXISTS `ap-project`.`guests` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_real` VARCHAR(45) NULL COMMENT 'eg. USR10021, MGR10025 or BTD10021' /* comment truncated */ /*Corresponds to "String id" in "User.class"*/,
   `name` VARCHAR(50) NOT NULL,
+  `password` VARCHAR(45) NULL,
   `code` VARCHAR(20) NOT NULL,
   `armband_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -89,6 +101,8 @@ DEFAULT CHARACTER SET = latin1;
 -- -----------------------------------------------------
 -- Table `ap-project`.`orders`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `ap-project`.`orders` ;
+
 CREATE TABLE IF NOT EXISTS `ap-project`.`orders` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `date` DATE NOT NULL,
@@ -107,6 +121,8 @@ DEFAULT CHARACTER SET = latin1;
 -- -----------------------------------------------------
 -- Table `ap-project`.`staff_roles`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `ap-project`.`staff_roles` ;
+
 CREATE TABLE IF NOT EXISTS `ap-project`.`staff_roles` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(20) NOT NULL,
@@ -119,9 +135,13 @@ DEFAULT CHARACTER SET = latin1;
 -- -----------------------------------------------------
 -- Table `ap-project`.`staff`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `ap-project`.`staff` ;
+
 CREATE TABLE IF NOT EXISTS `ap-project`.`staff` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_real` VARCHAR(45) NULL COMMENT 'eg. USR10021, MGR10025 or BTD10021' /* comment truncated */ /*Corresponds to "String id" in "User.class"*/,
   `name` VARCHAR(50) NOT NULL,
+  `password` VARCHAR(45) NULL,
   `hours` VARCHAR(20) NOT NULL,
   `role_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -138,6 +158,8 @@ DEFAULT CHARACTER SET = latin1;
 -- -----------------------------------------------------
 -- Table `ap-project`.`orders_has_drinks`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `ap-project`.`orders_has_drinks` ;
+
 CREATE TABLE IF NOT EXISTS `ap-project`.`orders_has_drinks` (
   `orders_id` INT(11) NOT NULL,
   `drinks_id` INT(11) NOT NULL,
@@ -161,6 +183,8 @@ DEFAULT CHARACTER SET = latin1;
 -- -----------------------------------------------------
 -- Table `ap-project`.`staff_has_orders`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `ap-project`.`staff_has_orders` ;
+
 CREATE TABLE IF NOT EXISTS `ap-project`.`staff_has_orders` (
   `staff_id` INT(11) NOT NULL,
   `orders_id` INT(11) NOT NULL,
