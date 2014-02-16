@@ -6,16 +6,16 @@ public class ArmBand {
 	private int colour;
 	private String code;
 	
-	public Date getsDate() {
+	public Date getSDate() {
 		return sDate;
 	}
-	public void setsDate(Date sDate) {
+	public void setSDate(Date sDate) {
 		this.sDate = sDate;
 	}
-	public Date geteDate() {
+	public Date getEDate() {
 		return eDate;
 	}
-	public void seteDate(Date eDate) {
+	public void setEDate(Date eDate) {
 		this.eDate = eDate;
 	}
 	public int getColour() {
@@ -41,7 +41,7 @@ public class ArmBand {
 	public ArmBand(){
 		sDate= new Date();
 		eDate= new Date();
-		colour=0;
+		colour = 0;
 		code="";
 	}
 	

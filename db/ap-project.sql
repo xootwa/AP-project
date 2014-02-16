@@ -1,145 +1,186 @@
--- AP-Project SQL
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+CREATE SCHEMA IF NOT EXISTS `ap-project` DEFAULT CHARACTER SET latin1 ;
+USE `ap-project` ;
+
+-- -----------------------------------------------------
+-- Table `ap-project`.`armband_colours`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ap-project`.`armband_colours` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(30) NULL,
+  `value` VARCHAR(12) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Database: `ap-project`
---
-CREATE DATABASE IF NOT EXISTS `ap-project` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `ap-project`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `armbands`
---
-
-CREATE TABLE IF NOT EXISTS `armbands` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sDate` date NOT NULL,
-  `eDate` date NOT NULL,
-  `colour` int(11) NOT NULL,
-  `code` varchar(12) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `drinks`
---
-
-CREATE TABLE IF NOT EXISTS `drinks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `price` varchar(10) NOT NULL,
-  `type` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `drink_types`
---
-
-CREATE TABLE IF NOT EXISTS `drink_types` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(15) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `drink_types`
---
-
-INSERT INTO `drink_types` (`id`, `name`) VALUES
-(1, 'Alcoholic'),
-(2, 'Non-Alcoholic');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `guests`
---
-
-CREATE TABLE IF NOT EXISTS `guests` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `code` varchar(20) NOT NULL,
-  `band_id` int(11) NOT NULL,
+-- -----------------------------------------------------
+-- Table `ap-project`.`armbands`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ap-project`.`armbands` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `sDate` DATE NOT NULL,
+  `eDate` DATE NOT NULL,
+  `colour` INT(11) NOT NULL,
+  `code` VARCHAR(12) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `band_id` (`band_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  INDEX `fk_armbands_armband_colours1_idx` (`colour` ASC),
+  CONSTRAINT `fk_armbands_armband_colours1`
+    FOREIGN KEY (`colour`)
+    REFERENCES `ap-project`.`armband_colours` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `orders`
---
+-- -----------------------------------------------------
+-- Table `ap-project`.`drink_types`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ap-project`.`drink_types` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(15) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = latin1;
 
-CREATE TABLE IF NOT EXISTS `orders` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `date` date NOT NULL,
-  `guest_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
+-- -----------------------------------------------------
+-- Table `ap-project`.`drinks`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ap-project`.`drinks` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50) NOT NULL,
+  `price` VARCHAR(10) NOT NULL,
+  `type` INT(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  INDEX `fk_drinks_drink_types1_idx` (`type` ASC),
+  CONSTRAINT `fk_drinks_drink_types1`
+    FOREIGN KEY (`type`)
+    REFERENCES `ap-project`.`drink_types` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
---
--- Table structure for table `serves`
---
 
-CREATE TABLE IF NOT EXISTS `serves` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `staff_id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL,
-  `drink_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+-- -----------------------------------------------------
+-- Table `ap-project`.`guests`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ap-project`.`guests` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50) NOT NULL,
+  `code` VARCHAR(20) NOT NULL,
+  `armband_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_guests_armbands1_idx` (`armband_id` ASC),
+  CONSTRAINT `fk_guests_armbands1`
+    FOREIGN KEY (`armband_id`)
+    REFERENCES `ap-project`.`armbands` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `staff`
---
+-- -----------------------------------------------------
+-- Table `ap-project`.`orders`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ap-project`.`orders` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `date` DATE NOT NULL,
+  `guest_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_orders_guests1_idx` (`guest_id` ASC),
+  CONSTRAINT `fk_orders_guests1`
+    FOREIGN KEY (`guest_id`)
+    REFERENCES `ap-project`.`guests` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
-CREATE TABLE IF NOT EXISTS `staff` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `hours` varchar(20) NOT NULL,
-  `role` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
+-- -----------------------------------------------------
+-- Table `ap-project`.`staff_roles`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ap-project`.`staff_roles` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = latin1;
 
---
--- Table structure for table `staff_roles`
---
 
-CREATE TABLE IF NOT EXISTS `staff_roles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+-- -----------------------------------------------------
+-- Table `ap-project`.`staff`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ap-project`.`staff` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50) NOT NULL,
+  `hours` VARCHAR(20) NOT NULL,
+  `role_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_staff_staff_roles_idx` (`role_id` ASC),
+  CONSTRAINT `fk_staff_staff_roles`
+    FOREIGN KEY (`role_id`)
+    REFERENCES `ap-project`.`staff_roles` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
---
--- Dumping data for table `staff_roles`
---
 
-INSERT INTO `staff_roles` (`id`, `name`) VALUES
-(1, 'Manager'),
-(2, 'Bartender');
+-- -----------------------------------------------------
+-- Table `ap-project`.`orders_has_drinks`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ap-project`.`orders_has_drinks` (
+  `orders_id` INT(11) NOT NULL,
+  `drinks_id` INT(11) NOT NULL,
+  PRIMARY KEY (`orders_id`, `drinks_id`),
+  INDEX `fk_orders_has_drinks_drinks1_idx` (`drinks_id` ASC),
+  INDEX `fk_orders_has_drinks_orders1_idx` (`orders_id` ASC),
+  CONSTRAINT `fk_orders_has_drinks_orders1`
+    FOREIGN KEY (`orders_id`)
+    REFERENCES `ap-project`.`orders` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orders_has_drinks_drinks1`
+    FOREIGN KEY (`drinks_id`)
+    REFERENCES `ap-project`.`drinks` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- -----------------------------------------------------
+-- Table `ap-project`.`staff_has_orders`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ap-project`.`staff_has_orders` (
+  `staff_id` INT(11) NOT NULL,
+  `orders_id` INT(11) NOT NULL,
+  PRIMARY KEY (`staff_id`, `orders_id`),
+  INDEX `fk_staff_has_orders_orders1_idx` (`orders_id` ASC),
+  INDEX `fk_staff_has_orders_staff1_idx` (`staff_id` ASC),
+  CONSTRAINT `fk_staff_has_orders_staff1`
+    FOREIGN KEY (`staff_id`)
+    REFERENCES `ap-project`.`staff` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_staff_has_orders_orders1`
+    FOREIGN KEY (`orders_id`)
+    REFERENCES `ap-project`.`orders` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
