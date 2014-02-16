@@ -1,22 +1,36 @@
 
 public class ArmBand {
 
-	private Date sDate;
-	private Date eDate;
+	private Date startDate;
+	private Date endDate;
 	private int colour;
 	private String code;
 	
+	public ArmBand(){
+		startDate= new Date();
+		endDate= new Date();
+		colour = 0;
+		code="";
+	}
+	
+	public ArmBand(Date sDate, Date eDate, int colour, String code) {
+		this.startDate = sDate;
+		this.endDate = eDate;
+		this.colour = colour;
+		this.code = code;
+	}
+	
 	public Date getSDate() {
-		return sDate;
+		return startDate;
 	}
 	public void setSDate(Date sDate) {
-		this.sDate = sDate;
+		this.startDate = sDate;
 	}
 	public Date getEDate() {
-		return eDate;
+		return endDate;
 	}
 	public void setEDate(Date eDate) {
-		this.eDate = eDate;
+		this.endDate = eDate;
 	}
 	public int getColour() {
 		return colour;
@@ -29,20 +43,6 @@ public class ArmBand {
 	}
 	public void setCode(String code) {
 		this.code = code;
-	}
-	public ArmBand(Date sDate, Date eDate, int colour, String code) {
-		super();
-		this.sDate = sDate;
-		this.eDate = eDate;
-		this.colour = colour;
-		this.code = code;
-	}
-	
-	public ArmBand(){
-		sDate= new Date();
-		eDate= new Date();
-		colour = 0;
-		code="";
 	}
 	
 }

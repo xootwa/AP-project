@@ -21,8 +21,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ap-project`.`armbands` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `sDate` DATE NOT NULL,
-  `eDate` DATE NOT NULL,
+  `startDate` DATE NOT NULL,
+  `endDate` DATE NOT NULL,
   `colour` INT(11) NOT NULL,
   `code` VARCHAR(12) NOT NULL,
   PRIMARY KEY (`id`),
