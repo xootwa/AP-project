@@ -121,5 +121,7 @@ public class AddDrinkView extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		
+		
 	}
 }
