@@ -6,21 +6,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.JPasswordField;
 
-import models.User;
+import models.Guest;
+import models.Staff;
 
 public class LoginView extends JFrame {
 
@@ -146,10 +149,18 @@ public class LoginView extends JFrame {
 				/* PR:
 				 * Attempt to login...
 				 */
-				if(User.login(textUserName.getText(), passwordField.getText())){
-					ManagerView manager = new ManagerView();
-					manager.setVisible(true);;
-					dispose();
+				try {
+					if(Staff.login(textUserName.getText().trim(), passwordField.getText().trim())){
+						ManagerView manager = new ManagerView();
+						manager.setVisible(true);;
+						dispose();
+					}else if(Guest.login(textUserName.getText().trim(), passwordField.getText().trim())){
+					
+					}else
+						JOptionPane.showMessageDialog(null, "Invalid Login!");
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
 			}
 		});
