@@ -25,6 +25,11 @@ import javax.swing.JSeparator;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.ListSelectionModel;
 
 public class ManagerView extends JFrame {
 
@@ -154,6 +159,49 @@ public class ManagerView extends JFrame {
 		toolBarPanel.setLayout(gl_toolBarPanel);
 		
 		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setSelectionBackground(new Color(46, 139, 87));
+		table.setRowMargin(0);
+		table.setFont(new Font("Serif", Font.PLAIN, 12));
+		table.setRowHeight(27);
+		table.setGridColor(new Color(0, 0, 0));
+		table.setBackground(new Color(211, 211, 211));
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"", null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+			},
+			new String[] {
+				"Name", "Type", "Price"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, String.class, Float.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
 	}
