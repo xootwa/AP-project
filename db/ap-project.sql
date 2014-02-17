@@ -62,7 +62,7 @@ DROP TABLE IF EXISTS `ap-project`.`drinks` ;
 CREATE TABLE IF NOT EXISTS `ap-project`.`drinks` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
-  `price` VARCHAR(10) NOT NULL,
+  `price` DOUBLE NOT NULL,
   `type` INT(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   INDEX `fk_drinks_drink_types1_idx` (`type` ASC),

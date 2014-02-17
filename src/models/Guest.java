@@ -1,7 +1,6 @@
 package models;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,17 +45,9 @@ public class Guest extends User {
 	 * @throws SQLException 
 	 */
 	public static boolean login(String username, String password) throws SQLException{
-		
-		try {
-			// Access JDBC driver from JAR 
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			return false;
-		}
 
 		// Connect to DB
-		Connection con = DriverManager.getConnection(Constants.DB, Constants.DB_USER, Constants.DB_PASS);
+		Connection con = DBConnect.getConnection();
 		// Query guest table
 		PreparedStatement checkGuests = con.prepareStatement("SELECT * FROM guests WHERE name = '" + username + "' AND password = '" + password + "'");
 		// Variable to execute query

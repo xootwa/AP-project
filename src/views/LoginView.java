@@ -27,6 +27,7 @@ import models.Staff;
 
 public class LoginView extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textUserName;
 	private JLabel lblUserName;
@@ -121,6 +122,7 @@ public class LoginView extends JFrame {
 		});
 		
 		passwordField.addFocusListener(new FocusListener(){
+			@SuppressWarnings("deprecation")
 			@Override
 			public void focusGained(FocusEvent event){
 				if(passwordField.getText().equals("Password")){
@@ -132,6 +134,7 @@ public class LoginView extends JFrame {
 				}
 			}
 			
+			@SuppressWarnings("deprecation")
 			@Override
 			public void focusLost(FocusEvent event){
 				if("".equalsIgnoreCase(passwordField.getText().trim())){
@@ -144,6 +147,7 @@ public class LoginView extends JFrame {
 		});
 		
 		btnLogin.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent ae) {
 				
 				/* PR:
@@ -157,7 +161,8 @@ public class LoginView extends JFrame {
 					}else if(Guest.login(textUserName.getText().trim(), passwordField.getText().trim())){
 					
 					}else
-						JOptionPane.showMessageDialog(null, "Invalid Login!");
+						JOptionPane.showMessageDialog(null, "The credentials you entered were invalid, please try again.","Invalid Login",
+							    JOptionPane.ERROR_MESSAGE);
 					
 				} catch (SQLException e) {
 					e.printStackTrace();
