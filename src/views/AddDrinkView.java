@@ -7,27 +7,35 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Toolkit;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.DefaultComboBoxModel;
+
+import models.Drink;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 public class AddDrinkView extends JDialog {
-
+	
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblName;
 	private JLabel lblType;
 	private JLabel lblPrice;
 	private JTextField tfName;
-	private JComboBox comboBoxType;
+	private JComboBox<String> comboBoxType;
 	private JSpinner spinnerPrice;
 
 	/**
@@ -52,8 +60,8 @@ public class AddDrinkView extends JDialog {
 		
 		spinnerPrice = new JSpinner();
 		
-		comboBoxType = new JComboBox();
-		comboBoxType.setModel(new DefaultComboBoxModel(new String[] {"Alcohol", "Beverage", "Cocktail", "Hot Beverage", "Soda", "Tea"}));
+		comboBoxType = new JComboBox<String>();
+		comboBoxType.setModel(new DefaultComboBoxModel<String>(new String[] {"-- select --", Drink.TYPES[0], Drink.TYPES[1]}));
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -102,6 +110,37 @@ public class AddDrinkView extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener(){
+
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						// get input values
+						String drinkName = tfName.getText().trim();
+						String drinkTypeString = comboBoxType.getSelectedItem().toString().trim();
+						Double drinkPrice = Double.parseDouble(spinnerPrice.getValue().toString());
+						// set drinkType integer
+						int drinkType = (drinkTypeString.equals(Drink.TYPES[0]))?1:2;
+						
+						// if everything is A-OK create Drink object and attempt to save
+						if(drinkName.length() > 2 && drinkPrice >= Drink.MIN_PRICE){
+							Drink aDrink = new Drink(drinkName, drinkType, drinkPrice);
+							
+							try {
+								if(aDrink.save()){
+									JOptionPane.showMessageDialog(null, drinkName+" drink added!", "Drink Added",
+										    JOptionPane.INFORMATION_MESSAGE);
+									clearFields(); // or dispose();
+								}
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+							
+						}else
+							JOptionPane.showMessageDialog(null, "The drink information you entered is invalid, please try again.","Invalid Drink",
+								    JOptionPane.ERROR_MESSAGE);
+					}
+					
+				});
 				okButton.setFocusable(false);
 				okButton.setIcon(new ImageIcon(AddDrinkView.class.getResource("/resources/accept.gif")));
 				okButton.setActionCommand("OK");
@@ -122,6 +161,11 @@ public class AddDrinkView extends JDialog {
 			}
 		}
 		
-		
+	}
+	
+	private void clearFields(){
+		this.comboBoxType.setSelectedIndex(0);
+		this.spinnerPrice.setValue(0);
+		this.tfName.setText(null);
 	}
 }

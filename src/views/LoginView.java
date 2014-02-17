@@ -6,21 +6,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.SQLException;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.JPasswordField;
+
+import models.Guest;
+import models.Staff;
 
 public class LoginView extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textUserName;
 	private JLabel lblUserName;
@@ -115,6 +122,7 @@ public class LoginView extends JFrame {
 		});
 		
 		passwordField.addFocusListener(new FocusListener(){
+			@SuppressWarnings("deprecation")
 			@Override
 			public void focusGained(FocusEvent event){
 				if(passwordField.getText().equals("Password")){
@@ -126,6 +134,7 @@ public class LoginView extends JFrame {
 				}
 			}
 			
+			@SuppressWarnings("deprecation")
 			@Override
 			public void focusLost(FocusEvent event){
 				if("".equalsIgnoreCase(passwordField.getText().trim())){
@@ -138,10 +147,26 @@ public class LoginView extends JFrame {
 		});
 		
 		btnLogin.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent ae) {
-				ManagerView manager = new ManagerView();
-				manager.setVisible(true);;
-				dispose();
+				
+				/* PR:
+				 * Attempt to login...
+				 */
+				try {
+					if(Staff.login(textUserName.getText().trim(), passwordField.getText().trim())){
+						ManagerView manager = new ManagerView();
+						manager.setVisible(true);;
+						dispose();
+					}else if(Guest.login(textUserName.getText().trim(), passwordField.getText().trim())){
+					
+					}else
+						JOptionPane.showMessageDialog(null, "The credentials you entered were invalid, please try again.","Invalid Login",
+							    JOptionPane.ERROR_MESSAGE);
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 	}

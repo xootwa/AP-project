@@ -1,12 +1,14 @@
+package models;
+
 public abstract class User {
 	protected String id;
 	protected String name;
 	protected String password;
 	
 	public User(){
-		this.id = Constants.NO_ID;
-		this.name = Constants.NO_NAME;
-		this.password = Constants.NO_PASSWORD;
+		this.id = Default.ID;
+		this.name = Default.NAME;
+		this.password = Default.PASSWORD;
 	}
 	public User(String id, String name, String password) {
 		this.id = id;
@@ -33,17 +35,14 @@ public abstract class User {
 		this.password = password;
 	}
 	
-	/*
+	/**
 	 *  PR:
 	 *  Protected constants for use with users
 	 */
-	protected static final class Constants{
-		public static final String DB = "";
-		
-		public static final String NO_ID = null;
-		public static final String NO_NAME = null;
-		public static final String NO_PASSWORD = "default";
-		
+	protected static final class Default{
+		public static final String ID = null;
+		public static final String NAME = null;
+		public static final String PASSWORD = "default";
 	}
 	
 }
