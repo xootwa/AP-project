@@ -1,6 +1,9 @@
 package models;
 
+import org.apache.log4j.*;
+
 public abstract class User {
+	protected static final Logger log = Logger.getLogger(User.class); //logger for User class and children
 	protected String id;
 	protected String name;
 	protected String password;

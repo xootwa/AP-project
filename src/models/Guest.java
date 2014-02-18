@@ -45,7 +45,8 @@ public class Guest extends User {
 	 * @throws SQLException 
 	 */
 	public static boolean login(String username, String password) throws SQLException{
-
+		log.trace("Guest login attempted...");
+		
 		// Connect to DB
 		Connection con = DBConnect.getConnection();
 		// Query guest table

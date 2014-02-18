@@ -22,6 +22,8 @@ public abstract class Staff extends User{
 	 * @throws SQLException 
 	 */
 	public static boolean login(String username, String password) throws SQLException{
+		log.trace("Staff login attempted...");
+		
 		
 		// Connect to DB
 		Connection con = DBConnect.getConnection();
