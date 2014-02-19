@@ -24,24 +24,25 @@ public abstract class Staff extends User{
 	public static boolean login(String username, String password) throws SQLException{
 		log.trace("Staff login attempted...");
 		
-		
 		// Connect to DB
 		Connection con = DBConnect.getConnection();
 		// Query staff table
 		PreparedStatement checkStaff = con.prepareStatement("SELECT * FROM staff WHERE name = '" + username + "' AND password = '" + password + "'");
 		// Variable to execute query
 		ResultSet result = checkStaff.executeQuery();
-			
-		/*  
-		 * Check for user occurrence in staff table:
-		 */
+		
+		
+		// Check for user occurrence in staff table:
 		int count = 0;
 		while(result.next())
 			++count;
-		if(count == 1)
+		if(count == 1){
+			log.trace("Staff login successful.");
 			return true;
+		}
 		
-		
+		// Close Connection
+		con.close();	
 		return false;
 	}
 	

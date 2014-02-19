@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.GroupLayout;
@@ -25,11 +26,10 @@ import javax.swing.JSeparator;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import java.awt.Font;
+
 import javax.swing.ListSelectionModel;
+
+import models.Drink.*;
 
 public class ManagerView extends JFrame {
 
@@ -125,6 +125,7 @@ public class ManagerView extends JFrame {
 		btnAddDrink.setForeground(new Color(255, 255, 255));
 		btnAddDrink.setBackground(new Color(139, 0, 0));
 		btnAddDrink.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent ae) {
 				AddDrinkView newDrink = new AddDrinkView();
 				newDrink.show();
@@ -166,42 +167,8 @@ public class ManagerView extends JFrame {
 		table.setRowHeight(27);
 		table.setGridColor(new Color(0, 0, 0));
 		table.setBackground(new Color(211, 211, 211));
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"", null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"Name", "Type", "Price"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, String.class, Float.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-			boolean[] columnEditables = new boolean[] {
-				false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
+		table.setModel(DrinkAdapter.getTableModel());
+		
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
 	}

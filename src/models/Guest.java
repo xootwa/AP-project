@@ -53,17 +53,20 @@ public class Guest extends User {
 		PreparedStatement checkGuests = con.prepareStatement("SELECT * FROM guests WHERE name = '" + username + "' AND password = '" + password + "'");
 		// Variable to execute query
 		ResultSet guestsResult = checkGuests.executeQuery();
-			
+		
 		/*  
 		 * Check for user occurrence in guest table:
 		 */
 		int count = 0;
 		while(guestsResult.next())
 			++count;
-		if(count == 1)
+		if(count == 1){
+			log.trace("Guest login successful.");
 			return true;
+		}
 		
-		
+		// Close Connection
+		con.close();	
 		return false;
 	}
 	
