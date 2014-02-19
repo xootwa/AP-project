@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 public class Drink {
 	private static final Logger log = Logger.getLogger(Drink.class); //logger for Drink class
-	public final static double MIN_PRICE = 500.0;
+	public final static double MIN_PRICE = 100.0;
 	public final static String TYPES[] = {"Alcoholic", "Non-Alcoholic"};
 	
 	

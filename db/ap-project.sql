@@ -2,6 +2,12 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
+USE mysql;
+DROP USER 'ap_project'@'localhost';
+create user 'ap_project'@'localhost' identified by 'root';
+grant select, insert, update, delete, create, drop, references,
+execute on *.* to 'ap-project'@'localhost';
+
 CREATE SCHEMA IF NOT EXISTS `ap-project` DEFAULT CHARACTER SET latin1 ;
 USE `ap-project` ;
 
