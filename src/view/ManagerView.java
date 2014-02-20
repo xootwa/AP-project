@@ -45,7 +45,7 @@ public class ManagerView extends JFrame {
 	public ManagerView() {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ManagerView.class.getResource("/resources/drink.png")));
-		setTitle("AP-Project v0.0.1");
+		setTitle("AP-Project v0.1.1");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 720, 576);
 		
