@@ -2,7 +2,7 @@ import java.awt.EventQueue;
 
 import javax.swing.UIManager;
 
-import views.LoginView;
+import view.LoginView;
 
 
 public class Driver {

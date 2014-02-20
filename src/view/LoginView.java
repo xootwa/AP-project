@@ -1,4 +1,4 @@
-package views;
+package view;
 
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -127,7 +127,7 @@ public class LoginView extends JFrame {
 			public void focusGained(FocusEvent event){
 				if(passwordField.getText().equals("Password")){
 					passwordField.setText("");
-					passwordField.setEchoChar('●');
+					passwordField.setEchoChar('\u2022');
 					passwordField.setForeground(new Color(0, 0, 0));
 					passwordField.setBorder(BorderFactory.createCompoundBorder(new LineBorder(new Color(128, 0, 0)),
 							BorderFactory.createEmptyBorder(0, 2, 0, 0)));
