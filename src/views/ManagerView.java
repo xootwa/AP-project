@@ -29,7 +29,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.ListSelectionModel;
 
-import models.Drink.*;
+import model.Drink.*;
 
 public class ManagerView extends JFrame {
 

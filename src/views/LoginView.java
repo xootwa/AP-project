@@ -22,8 +22,8 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import models.Guest;
-import models.Staff;
+import model.Guest;
+import model.Staff;
 
 public class LoginView extends JFrame {
 

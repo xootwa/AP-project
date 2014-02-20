@@ -21,7 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.DefaultComboBoxModel;
 
-import models.Drink;
+import model.Drink;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

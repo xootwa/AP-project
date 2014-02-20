@@ -4,7 +4,7 @@
  * Holds constant members related to database connection
  */
 
-package models;
+package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
