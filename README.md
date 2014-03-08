@@ -3,6 +3,7 @@ AP-project
 
 AP project 
 
+<<<<<<< HEAD
 
 University of Technology, Jamaica
 School of Computing and Information Technology
@@ -22,3 +23,5 @@ Reporting Module
 The manager should be able to pull up the report for all drinks for a particular day or between user-specified periods.
 Entity Design
 	Design your database diagram and class diagram that you will use to model your database which is due week 2 for approval.
+=======
+>>>>>>> a1325121f9dc1dc68ec0cd6bc43a5787916de4a3
