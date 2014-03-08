@@ -33,4 +33,3 @@ Entity Design
 
 Design your database diagram and class diagram that you will use to model your database which is due week 2 for approval.
 
->>>>>>> a1325121f9dc1dc68ec0cd6bc43a5787916de4a3
