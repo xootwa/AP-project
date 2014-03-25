@@ -51,7 +51,6 @@ public class About {
 	            + "<a href=\"http://www.reliqartz.com/\"><b> Patrick Reid</b></a><br />"
 	            + "- Brandon Franklyn <br />"
 	            + "- Rajiv Manderson <br />"
-                    + "- Warren Harding <br />"
 	            + "<br />"
 	            + "Tutor:"
 	            + "<br />"
